@@ -1,4 +1,4 @@
-# Reverse Linked List — Problem Structure
+# Reverse the Linked List — Problem Structure
 
 ```json
 {
