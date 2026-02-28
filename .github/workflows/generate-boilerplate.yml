@@ -1,0 +1,74 @@
+name: Generate Boilerplate
+
+on:
+  push:
+    paths:
+      - "problems/**/structure.md" # Only runs when a structure.md is added/changed
+
+permissions:
+  contents: write # Needed to commit generated files back
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout the repo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # Need previous commit to detect changed files
+
+      # 2. Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # 3. Find which structure.md files changed in this push
+      - name: Detect changed structure.md files
+        id: changed
+        run: |
+          # Get list of changed structure.md files between last 2 commits
+          CHANGED=$(git diff --name-only HEAD~1 HEAD -- "problems/**/structure.md" 2>/dev/null || \
+                    git diff --name-only HEAD -- "problems/**/structure.md")
+          echo "Changed files:"
+          echo "$CHANGED"
+          echo "files<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGED" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      # 4. Run generate.py for each changed problem
+      - name: Generate boilerplate
+        run: |
+          CHANGED="${{ steps.changed.outputs.files }}"
+          if [ -z "$CHANGED" ]; then
+            echo "No structure.md files changed. Skipping."
+            exit 0
+          fi
+
+          for FILE in $CHANGED; do
+            # FILE = "problems/Array/2sum/structure.md"
+            # Extract "Array/2sum" from the path
+            PROBLEM=$(echo "$FILE" | sed 's|problems/||' | sed 's|/structure.md||')
+            echo ""
+            echo ">>> Generating boilerplate for: $PROBLEM"
+            python generate.py "$PROBLEM"
+          done
+
+      # 5. Commit and push the generated files
+      - name: Commit generated boilerplate
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add problems/**/boilerplate/
+          git add problems/**/full-boilerplate/
+
+          # Only commit if there are actual changes
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "🤖 Auto-generate boilerplate [skip ci]"
+            git push
+          fi
