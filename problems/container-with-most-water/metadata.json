@@ -1,0 +1,18 @@
+{
+    "difficulty": "Medium",
+    "tags": [
+        "Array",
+        "Two Pointers",
+        "Greedy"
+    ],
+    "hints": [
+        {
+            "title": "Hint 1",
+            "content": "Start with the widest container (left = 0, right = n-1). Move the pointer with the **shorter** height inward — moving the taller one can only decrease area."
+        },
+        {
+            "title": "Hint 2",
+            "content": "At each step, area = `min(height[left], height[right]) * (right - left)`. Update the maximum and move the shorter-side pointer."
+        }
+    ]
+}

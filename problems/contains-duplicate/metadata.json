@@ -1,0 +1,18 @@
+{
+    "difficulty": "Easy",
+    "tags": [
+        "Array",
+        "Hash Table",
+        "Sorting"
+    ],
+    "hints": [
+        {
+            "title": "Hint 1",
+            "content": "Use a hash set. Insert each element; if it's already in the set, return true."
+        },
+        {
+            "title": "Hint 2",
+            "content": "Alternatively, sort the array and check adjacent elements."
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+{
+  "functionName": "productExceptSelf",
+  "parameters": [
+    {
+      "name": "nums",
+      "type": "int[]",
+      "description": "Array of integers"
+    }
+  ],
+  "returnType": "int[]",
+  "inputFormat": [
+    {
+      "line": 1,
+      "field": "nums",
+      "type": "int[]",
+      "delimiter": " "
+    }
+  ],
+  "outputFormat": [
+    {
+      "line": 1,
+      "field": "result",
+      "type": "int[]",
+      "delimiter": " "
+    }
+  ]
+}

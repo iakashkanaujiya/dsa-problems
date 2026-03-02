@@ -1,0 +1,18 @@
+{
+    "difficulty": "Medium",
+    "tags": [
+        "Linked List",
+        "Two Pointers",
+        "Hash Table"
+    ],
+    "hints": [
+        {
+            "title": "Hint 1 — Hash Set",
+            "content": "Store visited node references in a hash set. If you revisit a node, there's a cycle."
+        },
+        {
+            "title": "Hint 2 — Floyd's Cycle Detection",
+            "content": "Use two pointers: slow moves 1 step, fast moves 2 steps. If they meet, there's a cycle. If fast reaches null, no cycle."
+        }
+    ]
+}

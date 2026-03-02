@@ -1,0 +1,19 @@
+{
+    "difficulty": "Hard",
+    "tags": [
+        "Linked List",
+        "Divide and Conquer",
+        "Heap",
+        "Merge Sort"
+    ],
+    "hints": [
+        {
+            "title": "Hint 1 — Min-Heap",
+            "content": "Use a min-heap. Push the head of each list. Always pop the minimum, add it to the result, and push its next node."
+        },
+        {
+            "title": "Hint 2 — Divide and Conquer",
+            "content": "Pair up lists and merge pairs. Repeat until one list remains. This gives O(n log k) time."
+        }
+    ]
+}

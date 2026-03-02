@@ -1,0 +1,16 @@
+{
+    "difficulty": "Easy",
+    "tags": [
+        "Math"
+    ],
+    "hints": [
+        {
+            "title": "Hint 1",
+            "content": "All negative numbers are not palindromes. Numbers ending in 0 (except 0 itself) are not palindromes."
+        },
+        {
+            "title": "Hint 2",
+            "content": "Reverse only the second half of the number and compare with the first half. This avoids overflow from reversing the full number."
+        }
+    ]
+}

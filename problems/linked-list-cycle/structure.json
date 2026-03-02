@@ -1,0 +1,26 @@
+{
+  "functionName": "hasCycle",
+  "parameters": [
+    {
+      "name": "head",
+      "type": "ListNode",
+      "description": "Head of the linked list"
+    }
+  ],
+  "returnType": "bool",
+  "inputFormat": [
+    {
+      "line": 1,
+      "field": "head",
+      "type": "ListNode",
+      "delimiter": " "
+    }
+  ],
+  "outputFormat": [
+    {
+      "line": 1,
+      "field": "result",
+      "type": "bool"
+    }
+  ]
+}

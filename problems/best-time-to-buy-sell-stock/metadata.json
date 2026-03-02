@@ -1,0 +1,18 @@
+{
+    "difficulty": "Easy",
+    "tags": [
+        "Array",
+        "Dynamic Programming",
+        "Greedy"
+    ],
+    "hints": [
+        {
+            "title": "Hint 1",
+            "content": "Track the minimum price seen so far as you iterate. At each step, the profit if you sell today is `price[i] - min_so_far`."
+        },
+        {
+            "title": "Hint 2",
+            "content": "Update your answer with the maximum profit seen at each step."
+        }
+    ]
+}

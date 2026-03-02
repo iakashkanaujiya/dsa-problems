@@ -1,0 +1,36 @@
+{
+  "functionName": "search",
+  "parameters": [
+    {
+      "name": "nums",
+      "type": "int[]",
+      "description": "Rotated sorted array"
+    },
+    {
+      "name": "target",
+      "type": "int",
+      "description": "Target value to search"
+    }
+  ],
+  "returnType": "int",
+  "inputFormat": [
+    {
+      "line": 1,
+      "field": "nums",
+      "type": "int[]",
+      "delimiter": " "
+    },
+    {
+      "line": 2,
+      "field": "target",
+      "type": "int"
+    }
+  ],
+  "outputFormat": [
+    {
+      "line": 1,
+      "field": "result",
+      "type": "int"
+    }
+  ]
+}

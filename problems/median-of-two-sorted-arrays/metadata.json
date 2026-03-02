@@ -1,0 +1,18 @@
+{
+    "difficulty": "Hard",
+    "tags": [
+        "Array",
+        "Binary Search",
+        "Divide and Conquer"
+    ],
+    "hints": [
+        {
+            "title": "Hint 1",
+            "content": "Binary search on the smaller array. Partition both arrays such that all elements on the left are ≤ all elements on the right."
+        },
+        {
+            "title": "Hint 2",
+            "content": "For a partition at index `i` in `nums1` and `j = (m+n+1)/2 - i` in `nums2`, the partition is valid when `nums1[i-1] <= nums2[j]` and `nums2[j-1] <= nums1[i]`."
+        }
+    ]
+}

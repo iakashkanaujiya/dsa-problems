@@ -1,0 +1,25 @@
+{
+  "functionName": "isPalindrome",
+  "parameters": [
+    {
+      "name": "x",
+      "type": "int",
+      "description": "Integer to check"
+    }
+  ],
+  "returnType": "bool",
+  "inputFormat": [
+    {
+      "line": 1,
+      "field": "x",
+      "type": "int"
+    }
+  ],
+  "outputFormat": [
+    {
+      "line": 1,
+      "field": "result",
+      "type": "bool"
+    }
+  ]
+}

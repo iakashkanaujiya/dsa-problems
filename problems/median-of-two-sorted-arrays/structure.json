@@ -1,0 +1,37 @@
+{
+  "functionName": "findMedianSortedArrays",
+  "parameters": [
+    {
+      "name": "nums1",
+      "type": "int[]",
+      "description": "First sorted array"
+    },
+    {
+      "name": "nums2",
+      "type": "int[]",
+      "description": "Second sorted array"
+    }
+  ],
+  "returnType": "double",
+  "inputFormat": [
+    {
+      "line": 1,
+      "field": "nums1",
+      "type": "int[]",
+      "delimiter": " "
+    },
+    {
+      "line": 2,
+      "field": "nums2",
+      "type": "int[]",
+      "delimiter": " "
+    }
+  ],
+  "outputFormat": [
+    {
+      "line": 1,
+      "field": "result",
+      "type": "double"
+    }
+  ]
+}

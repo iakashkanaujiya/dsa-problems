@@ -1,0 +1,18 @@
+{
+    "difficulty": "Easy",
+    "tags": [
+        "Array",
+        "Two Pointers",
+        "Sorting"
+    ],
+    "hints": [
+        {
+            "title": "Hint 1",
+            "content": "Start merging from the **end** of both arrays. Place the larger element at position `m+n-1` of `nums1`."
+        },
+        {
+            "title": "Hint 2",
+            "content": "Use three pointers: `p1 = m-1`, `p2 = n-1`, `p = m+n-1`. Move backwards, always picking the larger of `nums1[p1]` and `nums2[p2]`."
+        }
+    ]
+}

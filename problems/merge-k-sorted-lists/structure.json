@@ -1,0 +1,27 @@
+{
+  "functionName": "mergeKLists",
+  "parameters": [
+    {
+      "name": "head",
+      "type": "ListNode",
+      "description": "Head of the first list (simplified: single list for testing)"
+    }
+  ],
+  "returnType": "ListNode",
+  "inputFormat": [
+    {
+      "line": 1,
+      "field": "head",
+      "type": "ListNode",
+      "delimiter": " "
+    }
+  ],
+  "outputFormat": [
+    {
+      "line": 1,
+      "field": "result",
+      "type": "ListNode",
+      "delimiter": " "
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "functionName": "maxArea",
+  "parameters": [
+    {
+      "name": "height",
+      "type": "int[]",
+      "description": "Array of heights"
+    }
+  ],
+  "returnType": "int",
+  "inputFormat": [
+    {
+      "line": 1,
+      "field": "height",
+      "type": "int[]",
+      "delimiter": " "
+    }
+  ],
+  "outputFormat": [
+    {
+      "line": 1,
+      "field": "result",
+      "type": "int"
+    }
+  ]
+}

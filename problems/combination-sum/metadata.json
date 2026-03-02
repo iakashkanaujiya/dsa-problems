@@ -1,0 +1,17 @@
+{
+    "difficulty": "Medium",
+    "tags": [
+        "Array",
+        "Backtracking"
+    ],
+    "hints": [
+        {
+            "title": "Hint 1",
+            "content": "Use backtracking. At each step, try adding each candidate to the current combination. Since we can reuse elements, don't increment the start index when recursing on the same candidate."
+        },
+        {
+            "title": "Hint 2",
+            "content": "Sort `candidates` first. When the remaining target goes below zero, prune that branch."
+        }
+    ]
+}

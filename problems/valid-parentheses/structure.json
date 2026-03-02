@@ -1,0 +1,17 @@
+{
+  "functionName": "isValid",
+  "parameters": [
+    {
+      "name": "s",
+      "type": "string",
+      "description": "The input string of bracket characters"
+    }
+  ],
+  "returnType": "bool",
+  "inputFormat": [
+    { "line": 1, "field": "s", "type": "string" }
+  ],
+  "outputFormat": [
+    { "line": 1, "field": "result", "type": "bool" }
+  ]
+}

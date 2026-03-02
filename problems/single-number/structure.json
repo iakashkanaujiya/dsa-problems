@@ -1,0 +1,26 @@
+{
+  "functionName": "singleNumber",
+  "parameters": [
+    {
+      "name": "nums",
+      "type": "int[]",
+      "description": "Array where every element appears twice except one"
+    }
+  ],
+  "returnType": "int",
+  "inputFormat": [
+    {
+      "line": 1,
+      "field": "nums",
+      "type": "int[]",
+      "delimiter": " "
+    }
+  ],
+  "outputFormat": [
+    {
+      "line": 1,
+      "field": "result",
+      "type": "int"
+    }
+  ]
+}

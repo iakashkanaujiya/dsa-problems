@@ -1,0 +1,26 @@
+{
+  "functionName": "trap",
+  "parameters": [
+    {
+      "name": "height",
+      "type": "int[]",
+      "description": "Elevation map heights"
+    }
+  ],
+  "returnType": "int",
+  "inputFormat": [
+    {
+      "line": 1,
+      "field": "height",
+      "type": "int[]",
+      "delimiter": " "
+    }
+  ],
+  "outputFormat": [
+    {
+      "line": 1,
+      "field": "result",
+      "type": "int"
+    }
+  ]
+}

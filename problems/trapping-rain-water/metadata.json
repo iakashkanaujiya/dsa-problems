@@ -1,0 +1,24 @@
+{
+    "difficulty": "Hard",
+    "tags": [
+        "Array",
+        "Two Pointers",
+        "Dynamic Programming",
+        "Stack",
+        "Monotonic Stack"
+    ],
+    "hints": [
+        {
+            "title": "Hint 1 — DP Approach",
+            "content": "For each position `i`, the water level is `min(maxLeft[i], maxRight[i]) - height[i]`. Precompute prefix max from left and suffix max from right."
+        },
+        {
+            "title": "Hint 2 — Two Pointers",
+            "content": "Maintain left and right pointers. If `height[left] < height[right]`, process `left` using `leftMax`; otherwise process `right` using `rightMax`. Move the shorter side inward."
+        },
+        {
+            "title": "Hint 3 — Monotonic Stack",
+            "content": "Use a stack of indices. When you find a bar taller than the stack top, you've found a valley — calculate the water that would fill it."
+        }
+    ]
+}

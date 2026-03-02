@@ -1,0 +1,27 @@
+{
+  "functionName": "merge",
+  "parameters": [
+    {
+      "name": "intervals",
+      "type": "int[][]",
+      "description": "List of intervals [start, end]"
+    }
+  ],
+  "returnType": "int[][]",
+  "inputFormat": [
+    {
+      "line": "each",
+      "field": "intervals",
+      "type": "int[][]",
+      "delimiter": " "
+    }
+  ],
+  "outputFormat": [
+    {
+      "line": "each",
+      "field": "result",
+      "type": "int[][]",
+      "delimiter": " "
+    }
+  ]
+}

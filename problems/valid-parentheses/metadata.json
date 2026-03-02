@@ -1,0 +1,17 @@
+{
+    "difficulty": "Easy",
+    "tags": [
+        "Stack",
+        "String"
+    ],
+    "hints": [
+        {
+            "title": "Hint 1",
+            "content": "Use a stack. When you see an opening bracket, push it. When you see a closing bracket, check if the top of the stack matches."
+        },
+        {
+            "title": "Hint 2",
+            "content": "If the stack is empty at any point when you encounter a closing bracket, or the top doesn't match, the string is invalid. At the end, the stack must be empty."
+        }
+    ]
+}

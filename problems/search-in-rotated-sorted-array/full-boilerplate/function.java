@@ -1,0 +1,13 @@
+import java.util.*;
+
+##USER_CODE##
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[] nums = Arrays.stream(sc.nextLine().trim().split("\\s+")).mapToInt(Integer::parseInt).toArray();
+        int target = Integer.parseInt(sc.nextLine().trim());
+        int result = new Solution().search(nums, target);
+        System.out.println(result);
+    }
+}

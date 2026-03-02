@@ -1,0 +1,17 @@
+{
+  "functionName": "maxProfit",
+  "parameters": [
+    {
+      "name": "prices",
+      "type": "int[]",
+      "description": "Array of stock prices by day"
+    }
+  ],
+  "returnType": "int",
+  "inputFormat": [
+    { "line": 1, "field": "prices", "type": "int[]", "delimiter": " " }
+  ],
+  "outputFormat": [
+    { "line": 1, "field": "result", "type": "int" }
+  ]
+}

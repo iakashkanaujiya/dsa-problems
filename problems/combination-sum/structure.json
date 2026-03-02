@@ -1,0 +1,37 @@
+{
+  "functionName": "combinationSum",
+  "parameters": [
+    {
+      "name": "candidates",
+      "type": "int[]",
+      "description": "Array of distinct integers"
+    },
+    {
+      "name": "target",
+      "type": "int",
+      "description": "Target sum"
+    }
+  ],
+  "returnType": "int[][]",
+  "inputFormat": [
+    {
+      "line": 1,
+      "field": "candidates",
+      "type": "int[]",
+      "delimiter": " "
+    },
+    {
+      "line": 2,
+      "field": "target",
+      "type": "int"
+    }
+  ],
+  "outputFormat": [
+    {
+      "line": "each",
+      "field": "combinations",
+      "type": "int[][]",
+      "delimiter": " "
+    }
+  ]
+}

@@ -3,7 +3,7 @@ name: Generate Boilerplate
 on:
   push:
     paths:
-      - "problems/**/structure.md" # Only runs when a structure.md is added/changed
+      - "problems/**/structure.json" # Runs when a structure.json is added/changed
 
 permissions:
   contents: write # Needed to commit generated files back
@@ -25,13 +25,13 @@ jobs:
         with:
           python-version: "3.11"
 
-      # 3. Find which structure.md files changed in this push
-      - name: Detect changed structure.md files
+      # 3. Find which structure.json files changed in this push
+      - name: Detect changed structure.json files
         id: changed
         run: |
-          # Get list of changed structure.md files between last 2 commits
-          CHANGED=$(git diff --name-only HEAD~1 HEAD -- "problems/**/structure.md" 2>/dev/null || \
-                    git diff --name-only HEAD -- "problems/**/structure.md")
+          # Get list of changed structure.json files between last 2 commits
+          CHANGED=$(git diff --name-only HEAD~1 HEAD -- "problems/**/structure.json" 2>/dev/null || \
+                    git diff --name-only HEAD -- "problems/**/structure.json")
           echo "Changed files:"
           echo "$CHANGED"
           echo "files<<EOF" >> $GITHUB_OUTPUT
@@ -43,14 +43,14 @@ jobs:
         run: |
           CHANGED="${{ steps.changed.outputs.files }}"
           if [ -z "$CHANGED" ]; then
-            echo "No structure.md files changed. Skipping."
+            echo "No structure.json files changed. Skipping."
             exit 0
           fi
 
           for FILE in $CHANGED; do
-            # FILE = "problems/Array/2sum/structure.md"
-            # Extract "Array/2sum" from the path
-            PROBLEM=$(echo "$FILE" | sed 's|problems/||' | sed 's|/structure.md||')
+            # FILE = "problems/2sum/structure.json"
+            # Extract "2sum" from the path
+            PROBLEM=$(echo "$FILE" | sed 's|problems/||' | sed 's|/structure.json||')
             echo ""
             echo ">>> Generating boilerplate for: $PROBLEM"
             python generate.py "$PROBLEM"
@@ -68,6 +68,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "🤖 Auto-generate boilerplate [skip ci]"
+            git commit -m "🤖 Auto-generate boilerplate (8 languages) [skip ci]"
             git push
           fi

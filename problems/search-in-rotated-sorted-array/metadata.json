@@ -1,0 +1,17 @@
+{
+    "difficulty": "Medium",
+    "tags": [
+        "Array",
+        "Binary Search"
+    ],
+    "hints": [
+        {
+            "title": "Hint 1",
+            "content": "In each binary search step, one half of the array is always sorted. Determine which half is sorted and check if the target falls in that range."
+        },
+        {
+            "title": "Hint 2",
+            "content": "If `nums[left] <= nums[mid]`, the left half is sorted. Check if `target` is in `[nums[left], nums[mid])`. Otherwise the right half is sorted."
+        }
+    ]
+}

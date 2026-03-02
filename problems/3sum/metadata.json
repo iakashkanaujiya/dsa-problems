@@ -1,0 +1,22 @@
+{
+    "difficulty": "Medium",
+    "tags": [
+        "Array",
+        "Two Pointers",
+        "Sorting"
+    ],
+    "hints": [
+        {
+            "title": "Hint 1",
+            "content": "Sort the array first. How does sorting help you avoid duplicate triplets and use efficient pointer movement?"
+        },
+        {
+            "title": "Hint 2",
+            "content": "Fix one element `nums[i]` and use two pointers (`left = i+1`, `right = n-1`) to find pairs that sum to `-nums[i]`."
+        },
+        {
+            "title": "Hint 3",
+            "content": "After sorting, skip duplicate values for `i`, `left`, and `right` to avoid duplicate triplets in the output."
+        }
+    ]
+}

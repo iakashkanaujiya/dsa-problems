@@ -1,0 +1,22 @@
+{
+    "difficulty": "Hard",
+    "tags": [
+        "String",
+        "Dynamic Programming",
+        "Stack"
+    ],
+    "hints": [
+        {
+            "title": "Hint 1 — Stack",
+            "content": "Push the index of `'('` onto the stack. For `')'`, pop from the stack. If the stack is empty, push the current index as a new base. Otherwise, the valid length is `i - stack.top()`."
+        },
+        {
+            "title": "Hint 2 — Dynamic Programming",
+            "content": "`dp[i]` = length of longest valid substring ending at `i`. If `s[i] == ')'` and `s[i-1] == '('`, then `dp[i] = dp[i-2] + 2`. If both are `')'` and `s[i - dp[i-1] - 1] == '('`, then extend."
+        },
+        {
+            "title": "Hint 3 — Two-pass scan",
+            "content": "Left-to-right: count `(` and `)`. When counts match, update max. When `)` exceeds `(`, reset. Then right-to-left with opposite condition to catch unclosed left parens."
+        }
+    ]
+}
