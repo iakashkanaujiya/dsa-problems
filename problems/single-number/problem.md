@@ -1,4 +1,11 @@
-# Single Number
+---
+title: Single Number
+slug: single-number
+difficulty: easy
+tags: [array, bit-manipulation]
+---
+
+## Description
 
 Given a **non-empty** array of integers `nums`, every element appears **twice** except for one. Find that single one.
 
@@ -6,8 +13,6 @@ You must implement a solution with:
 
 - **Linear runtime** complexity, and
 - **Constant extra space**.
-
----
 
 ## Examples
 
@@ -25,8 +30,6 @@ nums = [2, 2, 1]
 1
 ```
 
----
-
 ### Example 2
 
 **Input:**
@@ -40,8 +43,6 @@ nums = [4, 1, 2, 1, 2]
 ```
 4
 ```
-
----
 
 ### Example 3
 
@@ -57,10 +58,13 @@ nums = [1]
 1
 ```
 
----
-
 ## Constraints
 
 - `1 <= nums.length <= 3 * 10^4`
 - `-3 * 10^4 <= nums[i] <= 3 * 10^4`
 - Every element appears exactly twice except for one.
+
+## Hints
+
+- **Hint 1:** XOR has a useful property: `a XOR a = 0` and `a XOR 0 = a`. What happens if you XOR all elements together?
+- **Hint 2:** XOR all numbers: pairs cancel out leaving just the single number.

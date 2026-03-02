@@ -1,8 +1,13 @@
-# Reverse Linked List
+---
+title: Reverse Linked List
+slug: reverse-linked-list
+difficulty: easy
+tags: [linked-list, recursion]
+---
+
+## Description
 
 Given the `head` of a singly linked list, **reverse the list** and return the reversed list's head.
-
----
 
 ## Examples
 
@@ -20,8 +25,6 @@ Given the `head` of a singly linked list, **reverse the list** and return the re
 5 4 3 2 1
 ```
 
----
-
 ### Example 2
 
 **Input:**
@@ -35,8 +38,6 @@ Given the `head` of a singly linked list, **reverse the list** and return the re
 ```
 2 1
 ```
-
----
 
 ### Example 3
 
@@ -54,32 +55,15 @@ Given the `head` of a singly linked list, **reverse the list** and return the re
 
 **Explanation:** An empty list reversed is still empty.
 
----
-
 ## Constraints
 
 - The number of nodes in the list is in the range `[0, 5000]`.
 - `-5000 <= Node.val <= 5000`
 
----
+## Hints
 
-## Approaches
-
-### Iterative
-
-Use three pointers (`prev = null`, `curr = head`, `next`). At each step:
-
-1. Save `next = curr->next`
-2. Reverse: `curr->next = prev`
-3. Advance: `prev = curr`, `curr = next`
-
-Return `prev` when `curr` is null.
-
-### Recursive
-
-Base case: empty list or single node. Otherwise, recurse on `head->next`, then wire `head->next->next = head` and `head->next = null`.
-
----
+- **Hint 1 — Iterative:** Keep track of three pointers: `prev`, `curr`, and `next`. On each step, reverse the `curr->next` pointer to point to `prev`, then advance all three pointers forward.
+- **Hint 2 — Recursive:** Assume the rest of the list beyond the current node is already reversed. The current node's `next->next` should point back to the current node. Then set `current->next = null` to avoid a cycle.
 
 ## Follow-Up
 

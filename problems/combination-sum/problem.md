@@ -1,10 +1,15 @@
-# Combination Sum
+---
+title: Combination Sum
+slug: combination-sum
+difficulty: medium
+tags: [array, backtracking]
+---
+
+## Description
 
 Given an array of **distinct** integers `candidates` and a `target` integer, return a list of all **unique combinations** of `candidates` where the chosen numbers sum to `target`.
 
 You may return the combinations in **any order**. The **same** number may be chosen from `candidates` an **unlimited number of times**. Two combinations are unique if the frequency of at least one of the chosen numbers is different.
-
----
 
 ## Examples
 
@@ -26,8 +31,6 @@ target = 7
 
 **Explanation:** `2+2+3=7` and `7=7`.
 
----
-
 ### Example 2
 
 **Input:**
@@ -45,11 +48,14 @@ target = 8
 3 5
 ```
 
----
-
 ## Constraints
 
 - `1 <= candidates.length <= 30`
 - `2 <= candidates[i] <= 40`
 - All elements of `candidates` are **distinct**.
 - `1 <= target <= 40`
+
+## Hints
+
+- **Hint 1:** Use backtracking. At each step, try adding each candidate to the current combination. Since we can reuse elements, don't increment the start index when recursing on the same candidate.
+- **Hint 2:** Sort `candidates` first. When the remaining target goes below zero, prune that branch.
