@@ -32,9 +32,13 @@ public class Main {
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int[] _vals0 = Arrays.stream(sc.nextLine().trim().split("\\s+")).mapToInt(Integer::parseInt).toArray();
-        ListNode head = buildList(_vals0);
-        boolean result = new Solution().hasCycle(head);
-        System.out.println(result ? "true" : "false");
+        if (!sc.hasNextLine()) return;
+        int t = Integer.parseInt(sc.nextLine().trim());
+        while (t-- > 0) {
+            int[] _vals0 = Arrays.stream(sc.nextLine().trim().split("\\s+")).mapToInt(Integer::parseInt).toArray();
+            ListNode head = buildList(_vals0);
+            boolean result = new Solution().hasCycle(head);
+            System.out.println(result ? "true" : "false");
+        }
     }
 }

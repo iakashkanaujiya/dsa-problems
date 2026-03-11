@@ -6,9 +6,14 @@ rl.on("close", () => {
 
   ##USER_CODE##
 
-  const nums: number[] = lines[0].split(' ').map(Number);
-  const target: number = Number(lines[1]);
-  const sol = new Solution();
-  const result = sol.twoSum(nums, target);
-  console.log(result.join(' '));
+  if (lines.length === 0) return;
+  const t: number = Number(lines[0]);
+  let idx = 1;
+  for (let _i = 0; _i < t; _i++) {
+    const nums: number[] = lines[idx++].split(' ').map(Number);
+    const target: number = Number(lines[idx++]);
+    const sol = new Solution();
+    const result = sol.twoSum(nums, target);
+    console.log(result.join(' '));
+  }
 });

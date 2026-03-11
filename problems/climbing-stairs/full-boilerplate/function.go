@@ -18,7 +18,12 @@ func main() {
         scanner.Scan()
         return strings.TrimSpace(scanner.Text())
     }
-    n, _ := strconv.Atoi(readLine())
-    result := climbStairs(n)
-    fmt.Println(result)
+    tStr := readLine()
+    if tStr == "" { return }
+    t, _ := strconv.Atoi(tStr)
+    for i := 0; i < t; i++ {
+        n, _ := strconv.Atoi(readLine())
+        result := climbStairs(n)
+        fmt.Println(result)
+    }
 }

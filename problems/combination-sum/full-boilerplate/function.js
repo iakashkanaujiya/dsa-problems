@@ -6,9 +6,14 @@ rl.on("close", () => {
 
   ##USER_CODE##
 
-  const candidates = lines[0].split(' ').map(Number);
-  const target = Number(lines[1]);
-  const sol = new Solution();
-  const result = sol.combinationSum(candidates, target);
-  result.forEach(row => console.log(row.join(' ')));
+  if (lines.length === 0) return;
+  const t = Number(lines[0]);
+  let idx = 1;
+  for (let _i = 0; _i < t; _i++) {
+    const candidates = lines[idx++].split(' ').map(Number);
+    const target = Number(lines[idx++]);
+    const sol = new Solution();
+    const result = sol.combinationSum(candidates, target);
+    result.forEach(row => console.log(row.join(' ')));
+  }
 });

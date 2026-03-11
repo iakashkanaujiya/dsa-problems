@@ -5,15 +5,19 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int[] nums = Arrays.stream(sc.nextLine().trim().split("\\s+")).mapToInt(Integer::parseInt).toArray();
-        int[][] result = new Solution().threeSum(nums);
-        for (int[] _row : result) {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < _row.length; i++) {
-                if (i > 0) sb.append(" ");
-                sb.append(_row[i]);
+        if (!sc.hasNextLine()) return;
+        int t = Integer.parseInt(sc.nextLine().trim());
+        while (t-- > 0) {
+            int[] nums = Arrays.stream(sc.nextLine().trim().split("\\s+")).mapToInt(Integer::parseInt).toArray();
+            int[][] result = new Solution().threeSum(nums);
+            for (int[] _row : result) {
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < _row.length; i++) {
+                    if (i > 0) sb.append(" ");
+                    sb.append(_row[i]);
+                }
+                System.out.println(sb);
             }
-            System.out.println(sb);
         }
     }
 }

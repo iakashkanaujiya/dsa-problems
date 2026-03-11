@@ -5,8 +5,12 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int[] height = Arrays.stream(sc.nextLine().trim().split("\\s+")).mapToInt(Integer::parseInt).toArray();
-        int result = new Solution().maxArea(height);
-        System.out.println(result);
+        if (!sc.hasNextLine()) return;
+        int t = Integer.parseInt(sc.nextLine().trim());
+        while (t-- > 0) {
+            int[] height = Arrays.stream(sc.nextLine().trim().split("\\s+")).mapToInt(Integer::parseInt).toArray();
+            int result = new Solution().maxArea(height);
+            System.out.println(result);
+        }
     }
 }

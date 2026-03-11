@@ -6,9 +6,14 @@ rl.on("close", () => {
 
   ##USER_CODE##
 
-  const nums1: number[] = lines[0].split(' ').map(Number);
-  const nums2: number[] = lines[1].split(' ').map(Number);
-  const sol = new Solution();
-  const result = sol.findMedianSortedArrays(nums1, nums2);
-  console.log(result);
+  if (lines.length === 0) return;
+  const t: number = Number(lines[0]);
+  let idx = 1;
+  for (let _i = 0; _i < t; _i++) {
+    const nums1: number[] = lines[idx++].split(' ').map(Number);
+    const nums2: number[] = lines[idx++].split(' ').map(Number);
+    const sol = new Solution();
+    const result = sol.findMedianSortedArrays(nums1, nums2);
+    console.log(result);
+  }
 });

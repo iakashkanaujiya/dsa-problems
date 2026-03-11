@@ -39,9 +39,14 @@ fn main() {
     let stdin = io::stdin();
     let mut lines_iter = stdin.lock().lines().map(|l| l.unwrap());
     let mut read_line = || lines_iter.next().unwrap_or_default();
-    let _vals0: Vec<i32> = read_line().split_whitespace()
-        .map(|x| x.parse().unwrap()).collect();
-    let head = build_list(&_vals0);
-    let result = Solution::mergeKLists(head);
-    print_list(result);
+    let t_str = read_line();
+    if t_str.is_empty() { return; }
+    let t: i32 = t_str.trim().parse().unwrap();
+    for _ in 0..t {
+        let _vals0: Vec<i32> = read_line().split_whitespace()
+            .map(|x| x.parse().unwrap()).collect();
+        let head = build_list(&_vals0);
+        let result = Solution::mergeKLists(head);
+        print_list(result);
+    }
 }

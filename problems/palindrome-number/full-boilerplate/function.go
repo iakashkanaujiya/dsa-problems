@@ -18,7 +18,12 @@ func main() {
         scanner.Scan()
         return strings.TrimSpace(scanner.Text())
     }
-    x, _ := strconv.Atoi(readLine())
-    result := isPalindrome(x)
-    if result { fmt.Println("true") } else { fmt.Println("false") }
+    tStr := readLine()
+    if tStr == "" { return }
+    t, _ := strconv.Atoi(tStr)
+    for i := 0; i < t; i++ {
+        x, _ := strconv.Atoi(readLine())
+        result := isPalindrome(x)
+        if result { fmt.Println("true") } else { fmt.Println("false") }
+    }
 }

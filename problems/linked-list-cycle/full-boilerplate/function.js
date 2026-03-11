@@ -26,8 +26,13 @@ function printList(head) {
 
   ##USER_CODE##
 
-  const head = buildList(lines[0].split(' ').map(Number));
-  const sol = new Solution();
-  const result = sol.hasCycle(head);
-  console.log(result ? 'true' : 'false');
+  if (lines.length === 0) return;
+  const t = Number(lines[0]);
+  let idx = 1;
+  for (let _i = 0; _i < t; _i++) {
+    const head = buildList(lines[idx++].split(' ').map(Number));
+    const sol = new Solution();
+    const result = sol.hasCycle(head);
+    console.log(result ? 'true' : 'false');
+  }
 });

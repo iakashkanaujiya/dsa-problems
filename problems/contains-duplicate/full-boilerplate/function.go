@@ -18,9 +18,14 @@ func main() {
         scanner.Scan()
         return strings.TrimSpace(scanner.Text())
     }
-    _parts0 := strings.Fields(readLine())
-    nums := make([]int, len(_parts0))
-    for _i, _s := range _parts0 { nums[_i], _ = strconv.Atoi(_s) }
-    result := containsDuplicate(nums)
-    if result { fmt.Println("true") } else { fmt.Println("false") }
+    tStr := readLine()
+    if tStr == "" { return }
+    t, _ := strconv.Atoi(tStr)
+    for i := 0; i < t; i++ {
+        _parts0 := strings.Fields(readLine())
+        nums := make([]int, len(_parts0))
+        for _i, _s := range _parts0 { nums[_i], _ = strconv.Atoi(_s) }
+        result := containsDuplicate(nums)
+        if result { fmt.Println("true") } else { fmt.Println("false") }
+    }
 }

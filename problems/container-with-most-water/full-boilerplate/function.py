@@ -5,9 +5,14 @@ from typing import List
 
 def main():
     lines = sys.stdin.read().strip().splitlines()
-    height = list(map(int, lines[0].split()))
-    result = Solution().maxArea(height)
-    print(result)
+    if not lines: return
+    t = int(lines[0].strip())
+    idx = 1
+    for _ in range(t):
+        height = list(map(int, lines[idx].split()))
+        idx += 1
+        result = Solution().maxArea(height)
+        print(result)
 
 if __name__ == "__main__":
     main()

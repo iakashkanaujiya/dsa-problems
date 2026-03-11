@@ -6,8 +6,13 @@ rl.on("close", () => {
 
   ##USER_CODE##
 
-  const s = lines[0];
-  const sol = new Solution();
-  const result = sol.lengthOfLongestSubstring(s);
-  console.log(result);
+  if (lines.length === 0) return;
+  const t = Number(lines[0]);
+  let idx = 1;
+  for (let _i = 0; _i < t; _i++) {
+    const s = lines[idx++];
+    const sol = new Solution();
+    const result = sol.lengthOfLongestSubstring(s);
+    console.log(result);
+  }
 });

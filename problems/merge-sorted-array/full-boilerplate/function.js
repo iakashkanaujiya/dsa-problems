@@ -6,11 +6,16 @@ rl.on("close", () => {
 
   ##USER_CODE##
 
-  const nums1 = lines[0].split(' ').map(Number);
-  const m = Number(lines[1]);
-  const nums2 = lines[2].split(' ').map(Number);
-  const n = Number(lines[3]);
-  const sol = new Solution();
-  const result = sol.merge(nums1, m, nums2, n);
-  console.log(result.join(' '));
+  if (lines.length === 0) return;
+  const t = Number(lines[0]);
+  let idx = 1;
+  for (let _i = 0; _i < t; _i++) {
+    const nums1 = lines[idx++].split(' ').map(Number);
+    const m = Number(lines[idx++]);
+    const nums2 = lines[idx++].split(' ').map(Number);
+    const n = Number(lines[idx++]);
+    const sol = new Solution();
+    const result = sol.merge(nums1, m, nums2, n);
+    console.log(result.join(' '));
+  }
 });

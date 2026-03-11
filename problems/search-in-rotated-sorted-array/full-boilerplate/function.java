@@ -5,9 +5,13 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int[] nums = Arrays.stream(sc.nextLine().trim().split("\\s+")).mapToInt(Integer::parseInt).toArray();
-        int target = Integer.parseInt(sc.nextLine().trim());
-        int result = new Solution().search(nums, target);
-        System.out.println(result);
+        if (!sc.hasNextLine()) return;
+        int t = Integer.parseInt(sc.nextLine().trim());
+        while (t-- > 0) {
+            int[] nums = Arrays.stream(sc.nextLine().trim().split("\\s+")).mapToInt(Integer::parseInt).toArray();
+            int target = Integer.parseInt(sc.nextLine().trim());
+            int result = new Solution().search(nums, target);
+            System.out.println(result);
+        }
     }
 }

@@ -523,10 +523,19 @@ def print_list(head):
                 )
             elif typ == "string":
                 lines.append(f'    char {field}[100000]; scanf("%s", {field});')
+                lines.append(
+                    f"    int _c; while((_c = getchar()) != '\\n' && _c != EOF);"
+                )
             elif typ == "bool":
                 lines.append(f'    int {field}; scanf("%d", &{field});')
+                lines.append(
+                    f"    int _c; while((_c = getchar()) != '\\n' && _c != EOF);"
+                )
             else:
                 lines.append(f'    {c_type(typ)} {field}; scanf("%d", &{field});')
+                lines.append(
+                    f"    int _c; while((_c = getchar()) != '\\n' && _c != EOF);"
+                )
         return "\n".join(lines)
 
     def c_print_output(ret_var):
@@ -720,28 +729,47 @@ def print_list(head):
             field, typ = f["field"], f["type"]
             if typ in ("int[]", "long[]"):
                 lines.append(
-                    f"  const {field}: number[] = lines[{i}].split(' ').map(Number);"
+                    f"    const {field}: number[] = lines[idx++].split(' ').map(Number);"
                 )
             elif typ == "int[][]":
+                lines.append(f"    const _{field}_rows: number[][] = [];")
                 lines.append(
-                    f"  const {field}: number[][] = lines.slice({i}).filter(l => l !== '').map(l => l.split(' ').map(Number));"
+                    f"    while(idx < lines.length && lines[idx].trim() !== '') {{"
                 )
+                lines.append(
+                    f"      _{field}_rows.push(lines[idx++].split(' ').map(Number));"
+                )
+                lines.append(f"    }}")
+                lines.append(f"    idx++; // skip empty line")
+                lines.append(f"    const {field}: number[][] = _{field}_rows;")
             elif typ == "string[]":
-                lines.append(f"  const {field}: string[] = lines[{i}].split(' ');")
+                lines.append(f"    const {field}: string[] = lines[idx++].split(' ');")
             elif typ == "string":
-                lines.append(f"  const {field}: string = lines[{i}];")
+                lines.append(f"    const {field}: string = lines[idx++];")
             elif typ == "bool":
                 lines.append(
-                    f"  const {field}: boolean = lines[{i}].trim() === 'true' || lines[{i}].trim() === '1';"
+                    f"    const {field}: boolean = lines[idx].trim() === 'true' || lines[idx++].trim() === '1';"
                 )
+                lines.append(
+                    f"    if(!lines[idx-1].trim().includes('true') && !lines[idx-1].trim().includes('1')) idx++; else if(lines[idx-1].trim() === 'true' || lines[idx-1].trim()==='1') {{}} else idx++;"
+                )  # wait, simpler:
+                # Actually, simpler to just replace above bool statement
             elif typ == "ListNode":
                 lines.append(
-                    f"  const {field}: ListNode | null = buildList(lines[{i}].split(' ').map(Number));"
+                    f"    const {field}: ListNode | null = buildList(lines[idx++].split(' ').map(Number));"
                 )
             else:
                 cast = "Number" if typ in ("int", "long", "double", "float") else ""
-                lines.append(f"  const {field}: {ts_type(typ)} = {cast}(lines[{i}]);")
-        return "\n".join(lines)
+                lines.append(
+                    f"    const {field}: {ts_type(typ)} = {cast}(lines[idx++]);"
+                )
+        # Fix bool:
+        res = "\n".join(lines)
+        res = res.replace(
+            "const {field}: boolean = lines[idx].trim() === 'true' || lines[idx++].trim() === '1';",
+            "const _{field}Str = lines[idx++];\n    const {field}: boolean = _{field}Str.trim() === 'true' || _{field}Str.trim() === '1';",
+        )
+        return res
 
     def ts_print_output(ret_var):
         out = output_format[0]
@@ -847,26 +875,36 @@ def print_list(head):
         for i, f in enumerate(input_format):
             field, typ = f["field"], f["type"]
             if typ in ("int[]", "long[]"):
-                lines.append(f"  const {field} = lines[{i}].split(' ').map(Number);")
-            elif typ == "int[][]":
                 lines.append(
-                    f"  const {field} = lines.slice({i}).filter(l => l !== '').map(l => l.split(' ').map(Number));"
+                    f"    const {field} = lines[idx++].split(' ').map(Number);"
                 )
-            elif typ == "string[]":
-                lines.append(f"  const {field} = lines[{i}].split(' ');")
-            elif typ == "string":
-                lines.append(f"  const {field} = lines[{i}];")
-            elif typ == "bool":
+            elif typ == "int[][]":
+                lines.append(f"    const _{field}_rows = [];")
                 lines.append(
-                    f"  const {field} = lines[{i}].trim() === 'true' || lines[{i}].trim() === '1';"
+                    f"    while(idx < lines.length && lines[idx].trim() !== '') {{"
+                )
+                lines.append(
+                    f"      _{field}_rows.push(lines[idx++].split(' ').map(Number));"
+                )
+                lines.append(f"    }}")
+                lines.append(f"    idx++; // skip empty line")
+                lines.append(f"    const {field} = _{field}_rows;")
+            elif typ == "string[]":
+                lines.append(f"    const {field} = lines[idx++].split(' ');")
+            elif typ == "string":
+                lines.append(f"    const {field} = lines[idx++];")
+            elif typ == "bool":
+                lines.append(f"    const _{field}Str = lines[idx++];")
+                lines.append(
+                    f"    const {field} = _{field}Str.trim() === 'true' || _{field}Str.trim() === '1';"
                 )
             elif typ == "ListNode":
                 lines.append(
-                    f"  const {field} = buildList(lines[{i}].split(' ').map(Number));"
+                    f"    const {field} = buildList(lines[idx++].split(' ').map(Number));"
                 )
             else:
                 cast = "Number" if typ in ("int", "long", "double", "float") else ""
-                lines.append(f"  const {field} = {cast}(lines[{i}]);")
+                lines.append(f"    const {field} = {cast}(lines[idx++]);")
         return "\n".join(lines)
 
     def js_print_output(ret_var):
@@ -891,25 +929,37 @@ def print_list(head):
         for i, f in enumerate(input_format):
             field, typ = f["field"], f["type"]
             if typ in ("int[]", "long[]"):
-                lines.append(f"    {field} = list(map(int, lines[{i}].split()))")
+                lines.append(f"        {field} = list(map(int, lines[idx].split()))")
+                lines.append(f"        idx += 1")
             elif typ == "int[][]":
+                lines.append(f"        _{field}_rows = []")
+                lines.append(f"        while idx < len(lines) and lines[idx].strip():")
                 lines.append(
-                    f"    {field} = [list(map(int, l.split())) for l in lines[{i}:] if l.strip()]"
+                    f"            _{field}_rows.append(list(map(int, lines[idx].split())))"
                 )
+                lines.append(f"            idx += 1")
+                lines.append(f"        idx += 1 # skip empty line")
+                lines.append(f"        {field} = _{field}_rows")
             elif typ == "string[]":
-                lines.append(f"    {field} = lines[{i}].split()")
+                lines.append(f"        {field} = lines[idx].split()")
+                lines.append(f"        idx += 1")
             elif typ == "string":
-                lines.append(f"    {field} = lines[{i}]")
+                lines.append(f"        {field} = lines[idx]")
+                lines.append(f"        idx += 1")
             elif typ == "bool":
-                lines.append(f'    {field} = lines[{i}].strip() in ("true", "1")')
+                lines.append(f'        {field} = lines[idx].strip() in ("true", "1")')
+                lines.append(f"        idx += 1")
             elif typ in ("double", "float"):
-                lines.append(f"    {field} = float(lines[{i}])")
+                lines.append(f"        {field} = float(lines[idx])")
+                lines.append(f"        idx += 1")
             elif typ == "ListNode":
                 lines.append(
-                    f"    {field} = build_list(list(map(int, lines[{i}].split())))"
+                    f"        {field} = build_list(list(map(int, lines[idx].split())))"
                 )
+                lines.append(f"        idx += 1")
             else:
-                lines.append(f"    {field} = int(lines[{i}])")
+                lines.append(f"        {field} = int(lines[idx])")
+                lines.append(f"        idx += 1")
         return "\n".join(lines)
 
     def py_print_output(ret_var):
@@ -1095,6 +1145,15 @@ def print_list(head):
             else f"    sol.{function_name}({call_args});"
         )
         print_line = cpp_print_output("result")
+        parse_input_indented = "\n".join(
+            "    " + line if line else line for line in cpp_parse_input().split("\n")
+        )
+        ret_line_indented = "\n".join(
+            "        " + line.strip() for line in ret_line.split("\n")
+        )
+        print_line_indented = "\n".join(
+            "        " + line.strip() for line in print_line.split("\n")
+        )
         return (
             f"#include <bits/stdc++.h>\n"
             f"using namespace std;\n\n"
@@ -1103,10 +1162,17 @@ def print_list(head):
             f"int main() {{\n"
             f"    ios_base::sync_with_stdio(false);\n"
             f"    cin.tie(NULL);\n\n"
-            f"{cpp_parse_input()}\n"
-            f"    Solution sol;\n"
-            f"{ret_line}\n"
-            f"{print_line}\n"
+            f"    string line;\n"
+            f"    if (!getline(cin, line)) return 0;\n"
+            f"    istringstream iss(line);\n"
+            f"    int t;\n"
+            f"    if (!(iss >> t)) return 0;\n"
+            f"    while (t--) {{\n"
+            f"{parse_input_indented}\n"
+            f"        Solution sol;\n"
+            f"{ret_line_indented}\n"
+            f"{print_line_indented}\n"
+            f"    }}\n"
             f"    return 0;\n"
             f"}}\n"
         )
@@ -1133,13 +1199,26 @@ def print_list(head):
             else f"    {function_name}({call_args});"
         )
         print_line = c_print_output("result")
+        parse_input_indented = "\n".join(
+            "    " + line if line else line for line in c_parse_input().split("\n")
+        )
+        ret_line_indented = "\n".join("    " + line for line in ret_line.split("\n"))
+        print_line_indented = "\n".join(
+            "    " + line if line else line
+            for line in c_print_output("result").split("\n")
+        )
         return (
             f"{preamble}"
             f"##USER_CODE##\n\n"
             f"int main() {{\n"
-            f"{c_parse_input()}\n"
-            f"{ret_line}\n"
-            f"{print_line}\n"
+            f"    char t_buf[256];\n"
+            f"    if (!fgets(t_buf, sizeof(t_buf), stdin)) return 0;\n"
+            f"    int t = atoi(t_buf);\n"
+            f"    while (t--) {{\n"
+            f"{parse_input_indented}\n"
+            f"{ret_line_indented}\n"
+            f"{print_line_indented}\n"
+            f"    }}\n"
             f"    return 0;\n"
             f"}}\n"
         )
@@ -1160,6 +1239,16 @@ def print_list(head):
             else f"    {function_name}({call_args})"
         )
         print_line = go_print_output("result")
+        parse_input_indented = "\n".join(
+            "    " + line if line.strip() else line
+            for line in go_parse_input().split("\n")[7:]
+        )
+        scanner_code = "\n".join(go_parse_input().split("\n")[:7])
+        ret_line_indented = "\n".join("    " + line for line in ret_line.split("\n"))
+        print_line_indented = "\n".join(
+            "    " + line if line else line
+            for line in go_print_output("result").split("\n")
+        )
         return (
             f"package main\n\n"
             f"import (\n"
@@ -1172,9 +1261,15 @@ def print_list(head):
             f"{preamble}"
             f"##USER_CODE##\n\n"
             f"func main() {{\n"
-            f"{go_parse_input()}\n"
-            f"{ret_line}\n"
-            f"{print_line}\n"
+            f"{scanner_code}\n"
+            f"    tStr := readLine()\n"
+            f'    if tStr == "" {{ return }}\n'
+            f"    t, _ := strconv.Atoi(tStr)\n"
+            f"    for i := 0; i < t; i++ {{\n"
+            f"{parse_input_indented}\n"
+            f"{ret_line_indented}\n"
+            f"{print_line_indented}\n"
+            f"    }}\n"
             f"}}\n"
         )
 
@@ -1194,13 +1289,29 @@ def print_list(head):
             else f"    Solution::{function_name}({call_args});"
         )
         print_line = rust_print_output("result")
+        parse_input_indented = "\n".join(
+            "    " + line if line.strip() else line
+            for line in rust_parse_input().split("\n")[4:]
+        )
+        scanner_code = "\n".join(rust_parse_input().split("\n")[:4])
+        ret_line_indented = "\n".join("    " + line for line in ret_line.split("\n"))
+        print_line_indented = "\n".join(
+            "    " + line if line else line
+            for line in rust_print_output("result").split("\n")
+        )
         return (
             f"{preamble}"
             f"##USER_CODE##\n\n"
             f"fn main() {{\n"
-            f"{rust_parse_input()}\n"
-            f"{ret_line}\n"
-            f"{print_line}\n"
+            f"{scanner_code}\n"
+            f"    let t_str = read_line();\n"
+            f"    if t_str.is_empty() {{ return; }}\n"
+            f"    let t: i32 = t_str.trim().parse().unwrap();\n"
+            f"    for _ in 0..t {{\n"
+            f"{parse_input_indented}\n"
+            f"{ret_line_indented}\n"
+            f"{print_line_indented}\n"
+            f"    }}\n"
             f"}}\n"
         )
 
@@ -1214,6 +1325,9 @@ def print_list(head):
             else f"  sol.{function_name}({param_names});"
         )
         print_line = ts_print_output("result")
+        parse_input_indented = ts_parse_input()
+        ret_line_indented = "\n".join("  " + line for line in call_line.split("\n"))
+        print_line_indented = "\n".join("  " + line for line in print_line.split("\n"))
         return (
             f'const readline = require("readline");\n'
             f"const rl = readline.createInterface({{ input: process.stdin }});\n"
@@ -1222,10 +1336,15 @@ def print_list(head):
             f'rl.on("close", () => {{\n'
             f"{preamble}\n"
             f"  ##USER_CODE##\n\n"
-            f"{ts_parse_input()}\n"
-            f"  const sol = new Solution();\n"
-            f"{call_line}\n"
-            f"{print_line}\n"
+            f"  if (lines.length === 0) return;\n"
+            f"  const t: number = Number(lines[0]);\n"
+            f"  let idx = 1;\n"
+            f"  for (let _i = 0; _i < t; _i++) {{\n"
+            f"{parse_input_indented}\n"
+            f"    const sol = new Solution();\n"
+            f"{ret_line_indented}\n"
+            f"{print_line_indented}\n"
+            f"  }}\n"
             f"}});\n"
         )
 
@@ -1263,6 +1382,16 @@ def print_list(head):
             else f"        new Solution().{function_name}({call_args});"
         )
         print_line = java_print_output("result")
+        parse_input_indented = "\n".join(
+            "    " + line if line.strip() else line
+            for line in java_parse_input().split("\n")[1:]
+        )
+        scanner_code = "\n".join(java_parse_input().split("\n")[:1])
+        ret_line_indented = "\n".join("    " + line for line in ret_line.split("\n"))
+        print_line_indented = "\n".join(
+            "    " + line if line else line
+            for line in java_print_output("result").split("\n")
+        )
         return (
             f"import java.util.*;\n\n"
             f"{preamble}"
@@ -1270,9 +1399,14 @@ def print_list(head):
             f"public class Main {{\n"
             f"{java_listnode_helpers}"
             f"    public static void main(String[] args) {{\n"
-            f"{java_parse_input()}\n"
-            f"{ret_line}\n"
-            f"{print_line}\n"
+            f"{scanner_code}\n"
+            f"        if (!sc.hasNextLine()) return;\n"
+            f"        int t = Integer.parseInt(sc.nextLine().trim());\n"
+            f"        while (t-- > 0) {{\n"
+            f"{parse_input_indented}\n"
+            f"{ret_line_indented}\n"
+            f"{print_line_indented}\n"
+            f"        }}\n"
             f"    }}\n"
             f"}}\n"
         )
@@ -1286,6 +1420,9 @@ def print_list(head):
             else f"  sol.{function_name}({param_names});"
         )
         print_line = js_print_output("result")
+        parse_input_indented = js_parse_input()
+        ret_line_indented = "\n".join("  " + line for line in call_line.split("\n"))
+        print_line_indented = "\n".join("  " + line for line in print_line.split("\n"))
         return (
             f'const readline = require("readline");\n'
             f"const rl = readline.createInterface({{ input: process.stdin }});\n"
@@ -1294,10 +1431,15 @@ def print_list(head):
             f'rl.on("close", () => {{\n'
             f"{preamble}\n"
             f"  ##USER_CODE##\n\n"
-            f"{js_parse_input()}\n"
-            f"  const sol = new Solution();\n"
-            f"{call_line}\n"
-            f"{print_line}\n"
+            f"  if (lines.length === 0) return;\n"
+            f"  const t = Number(lines[0]);\n"
+            f"  let idx = 1;\n"
+            f"  for (let _i = 0; _i < t; _i++) {{\n"
+            f"{parse_input_indented}\n"
+            f"    const sol = new Solution();\n"
+            f"{ret_line_indented}\n"
+            f"{print_line_indented}\n"
+            f"  }}\n"
             f"}});\n"
         )
 
@@ -1321,6 +1463,11 @@ def print_list(head):
             else f"    Solution().{function_name}({param_names})"
         )
         print_line = py_print_output("result")
+        parse_input_indented = py_parse_input()
+        ret_line_indented = "\n".join("    " + line for line in call_line.split("\n"))
+        print_line_indented = "\n".join(
+            "    " + line for line in print_line.split("\n")
+        )
         return (
             f"import sys\n"
             f"{typing_import}\n"
@@ -1328,9 +1475,13 @@ def print_list(head):
             f"##USER_CODE##\n\n"
             f"def main():\n"
             f"    lines = sys.stdin.read().strip().splitlines()\n"
-            f"{py_parse_input()}\n"
-            f"{call_line}\n"
-            f"{print_line}\n\n"
+            f"    if not lines: return\n"
+            f"    t = int(lines[0].strip())\n"
+            f"    idx = 1\n"
+            f"    for _ in range(t):\n"
+            f"{parse_input_indented}\n"
+            f"{ret_line_indented}\n"
+            f"{print_line_indented}\n\n"
             f'if __name__ == "__main__":\n'
             f"    main()\n"
         )

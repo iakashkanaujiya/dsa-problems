@@ -6,8 +6,13 @@ rl.on("close", () => {
 
   ##USER_CODE##
 
-  const s: string = lines[0];
-  const sol = new Solution();
-  const result = sol.isValid(s);
-  console.log(result ? 'true' : 'false');
+  if (lines.length === 0) return;
+  const t: number = Number(lines[0]);
+  let idx = 1;
+  for (let _i = 0; _i < t; _i++) {
+    const s: string = lines[idx++];
+    const sol = new Solution();
+    const result = sol.isValid(s);
+    console.log(result ? 'true' : 'false');
+  }
 });

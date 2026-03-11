@@ -34,12 +34,17 @@ void printList(struct ListNode* head) {
 ##USER_CODE##
 
 int main() {
-    int _vals0[100000]; int _n0 = 0;
-    { char _buf0[1000000]; fgets(_buf0, sizeof(_buf0), stdin);
-      char* _tok = strtok(_buf0, " \n");
-      while (_tok) { _vals0[_n0++] = atoi(_tok); _tok = strtok(NULL, " \n"); } }
-    struct ListNode* head = buildList(_vals0, _n0);
-    struct ListNode* result = reverseList(head);
-    printList(result);
+    char t_buf[256];
+    if (!fgets(t_buf, sizeof(t_buf), stdin)) return 0;
+    int t = atoi(t_buf);
+    while (t--) {
+        int _vals0[100000]; int _n0 = 0;
+        { char _buf0[1000000]; fgets(_buf0, sizeof(_buf0), stdin);
+          char* _tok = strtok(_buf0, " \n");
+          while (_tok) { _vals0[_n0++] = atoi(_tok); _tok = strtok(NULL, " \n"); } }
+        struct ListNode* head = buildList(_vals0, _n0);
+        struct ListNode* result = reverseList(head);
+        printList(result);
+    }
     return 0;
 }

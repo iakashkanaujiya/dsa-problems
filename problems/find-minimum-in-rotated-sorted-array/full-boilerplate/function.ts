@@ -6,8 +6,13 @@ rl.on("close", () => {
 
   ##USER_CODE##
 
-  const nums: number[] = lines[0].split(' ').map(Number);
-  const sol = new Solution();
-  const result = sol.findMin(nums);
-  console.log(result);
+  if (lines.length === 0) return;
+  const t: number = Number(lines[0]);
+  let idx = 1;
+  for (let _i = 0; _i < t; _i++) {
+    const nums: number[] = lines[idx++].split(' ').map(Number);
+    const sol = new Solution();
+    const result = sol.findMin(nums);
+    console.log(result);
+  }
 });

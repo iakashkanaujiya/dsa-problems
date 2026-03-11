@@ -4,9 +4,14 @@ import sys
 
 def main():
     lines = sys.stdin.read().strip().splitlines()
-    s = lines[0]
-    result = Solution().longestValidParentheses(s)
-    print(result)
+    if not lines: return
+    t = int(lines[0].strip())
+    idx = 1
+    for _ in range(t):
+        s = lines[idx]
+        idx += 1
+        result = Solution().longestValidParentheses(s)
+        print(result)
 
 if __name__ == "__main__":
     main()

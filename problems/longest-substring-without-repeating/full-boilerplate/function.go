@@ -18,7 +18,12 @@ func main() {
         scanner.Scan()
         return strings.TrimSpace(scanner.Text())
     }
-    s := readLine()
-    result := lengthOfLongestSubstring(s)
-    fmt.Println(result)
+    tStr := readLine()
+    if tStr == "" { return }
+    t, _ := strconv.Atoi(tStr)
+    for i := 0; i < t; i++ {
+        s := readLine()
+        result := lengthOfLongestSubstring(s)
+        fmt.Println(result)
+    }
 }
