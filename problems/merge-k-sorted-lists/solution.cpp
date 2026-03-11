@@ -60,7 +60,9 @@ int main() {
         vector<int> _vals0; { int _v; while(_iss0 >> _v) _vals0.push_back(_v); }
         ListNode* head = buildList(_vals0);
         Solution sol;
-        ListNode* result = sol.mergeKLists(head);
+        vector<ListNode*> lists;
+        if (head) lists.push_back(head);
+        ListNode* result = sol.mergeKLists(lists);
         printList(result);
     }
     return 0;

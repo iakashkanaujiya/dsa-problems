@@ -31,10 +31,10 @@ int main() {
         vector<int> nums2; { int _v; while(_iss2 >> _v) nums2.push_back(_v); }
         int n; cin >> n; cin.ignore();
         Solution sol;
-        vector<int> result = sol.merge(nums1, m, nums2, n);
-        for (int i = 0; i < (int)result.size(); i++) {
+        sol.merge(nums1, m, nums2, n);
+        for (int i = 0; i < (int)nums1.size(); i++) {
         if (i) cout << " ";
-        cout << result[i];
+        cout << nums1[i];
         }
         cout << "\n";
     }
