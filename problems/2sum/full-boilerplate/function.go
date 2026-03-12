@@ -8,8 +8,6 @@ import (
     "strings"
 )
 
-##USER_CODE##
-
 func main() {
     scanner := bufio.NewScanner(os.Stdin)
     scanner.Buffer(make([]byte, 1024*1024), 1024*1024)

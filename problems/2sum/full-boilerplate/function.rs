@@ -1,3 +1,4 @@
+
 ##USER_CODE##
 
 fn main() {
@@ -6,11 +7,15 @@ fn main() {
     let mut lines_iter = stdin.lock().lines().map(|l| l.unwrap());
     let mut read_line = || lines_iter.next().unwrap_or_default();
     let t_str = read_line();
-    if t_str.is_empty() { return; }
+    if t_str.is_empty() {
+        return;
+    }
     let t: i32 = t_str.trim().parse().unwrap();
     for _ in 0..t {
-        let nums: Vec<i32> = read_line().split_whitespace()
-            .map(|x| x.parse().unwrap()).collect();
+        let nums: Vec<i32> = read_line()
+            .split_whitespace()
+            .map(|x| x.parse().unwrap())
+            .collect();
         let target: i32 = read_line().trim().parse().unwrap();
         let result = Solution::twoSum(nums, target);
         let _strs: Vec<String> = result.iter().map(|x| x.to_string()).collect();
